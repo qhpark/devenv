@@ -1,0 +1,24 @@
+find -L $1 -type f \( -name \*.h -o -name \*.c -o -name \*.cpp -o -name \*.hpp -o -name \*.cc -o \
+         -name \*.nm -o \
+         -name \*.js -o -name \*.pcy -o -name \*.mfs -o \
+         -name \*.vh -o -name \*.v -o -name \*.vx -o \
+         -name \*.mk -o -name Make\* -o \
+         -name \*.ref -o -name \*.spec -o \
+         -name \*.testlist -o -name \*.config -o \
+         -name \*.pl -o -name \*.py -o -name \*.pm -o \
+         -name \*.sh -o -name \*.csh -o \
+         -name \*.mfs -o \
+         -name \*.sidl -o \
+         -name \*.S -o \
+         -name \*.s -o \
+         -name \*.asm -o \
+         -name \*.idl -o \
+         -name \*.def -o \
+         -name \*.table -o \
+         -name \*.vcproj -o -name \*.sln -o \
+         -name README\* -o \
+         -name Readme\* -o \
+         -name readme\* -o \
+         -false \)  \
+         | \
+         grep -v '.makepp'

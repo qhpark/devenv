@@ -1,0 +1,9 @@
+#!/bin/sh
+cd $QPRJ_PATH
+
+findsrc . > cscope.files
+
+killall cscope
+rm cscope.out* 2> /dev/null
+
+cscope -q -b -f cscope.out -i cscope.files >& /dev/null

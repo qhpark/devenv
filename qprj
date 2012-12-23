@@ -1,0 +1,42 @@
+#!/bin/sh
+SUPPORTED_PRJ="prj1, prj2, prj3, ... "
+if [ -z "$1" ]; then
+    echo "Usage: qprj <project name>"
+    echo "Supported project names : $SUPPORTED_PRJ" 
+    exit 0
+elif [ "$1" = "prj1" ]; then
+    export QPRJ_PATH=~/prj1
+    export CSCOPE_DB=$QPRJ_PATH/cscope.out
+    export CTAGS_DB=$QPRJ_PATH/tags
+elif [ "$1" = "prj2" ]; then
+    export QPRJ_PATH=~/prj2
+    export CSCOPE_DB=$QPRJ_PATH/cscope.out
+    export CTAGS_DB=$QPRJ_PATH/tags
+elif [ "$1" = "prj3" ]; then
+    export QPRJ_PATH=~/prj3
+    export CSCOPE_DB=$QPRJ_PATH/cscope.out
+    export CTAGS_DB=$QPRJ_PATH/tags
+else
+    echo "Unrecognized Project Name: $1"
+    echo "Supported project names : $SUPPORTED_PRJ" 
+    exit 1
+fi
+
+# if already working under a project
+if [ ! -z "$QPRJ" ]; then
+    echo "WARNING: You are already working under the project $QPRJ"
+    export QPRJ=$1"*"
+else
+    export QPRJ=$1
+fi
+
+export QPS="\[\033[1;30m\][\[\033[1;34m\]\u|$QPRJ\[\033[1;30m\]@\[\033[0;35m\]\h\[\033[1;30m\]] \[\033[0;37m\]\w \[\033[1;30m\]\$\[\033[0m\] "
+export PROMPT_COMMAND="echo -ne \"\033]0;[$QPRJ] : ${QPRJ_PATH}\007\""
+
+cd $QPRJ_PATH
+
+if [ -z "$2" ]; then
+    bash
+else
+    $2
+fi

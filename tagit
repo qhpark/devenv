@@ -1,0 +1,3 @@
+#!/bin/sh
+cd $QPRJ_PATH
+ctags --extra=+q -R .
